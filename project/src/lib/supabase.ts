@@ -53,9 +53,16 @@ export const getPatient = async (id: string): Promise<Patient | null> => {
 };
 
 export const createPatient = async (patient: Omit<Patient, 'id' | 'created_at'>): Promise<Patient> => {
+  // Clean up the data before sending to Supabase
+  const cleanedPatient = {
+    ...patient,
+    // Convert empty strings to null for date fields
+    dob: patient.dob === '' ? null : patient.dob,
+  };
+
   const { data, error } = await supabase
     .from('patients')
-    .insert([patient])
+    .insert([cleanedPatient])
     .select()
     .single();
   
@@ -64,9 +71,16 @@ export const createPatient = async (patient: Omit<Patient, 'id' | 'created_at'>)
 };
 
 export const updatePatient = async (id: string, updates: Partial<Patient>): Promise<Patient> => {
+  // Clean up the data before sending to Supabase
+  const cleanedUpdates = {
+    ...updates,
+    // Convert empty strings to null for date fields
+    dob: updates.dob === '' ? null : updates.dob,
+  };
+
   const { data, error } = await supabase
     .from('patients')
-    .update(updates)
+    .update(cleanedUpdates)
     .eq('id', id)
     .select()
     .single();

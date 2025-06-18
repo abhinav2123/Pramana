@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Search, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { getPatients, Patient } from '../../lib/supabase';
+import { getPatients, Patient, supabase } from '../../lib/supabase';
 import PatientCard from '../patients/PatientCard';
 import MetricCard from '../ui/MetricCard';
 
@@ -13,6 +13,22 @@ const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   
   useEffect(() => {
+    // Test Supabase connection
+    const testConnection = async () => {
+      try {
+        const { data, error } = await supabase.from('patients').select('count').limit(1);
+        if (error) {
+          console.error('Supabase connection error:', error);
+        } else {
+          console.log('Supabase connection successful');
+        }
+      } catch (error) {
+        console.error('Supabase connection test failed:', error);
+      }
+    };
+
+    testConnection();
+    
     const fetchPatients = async () => {
       try {
         const data = await getPatients();
