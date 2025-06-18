@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Edit, Calendar, Phone, Mail, MapPin, User, CreditCard, Heart, Building } from 'lucide-react';
+import { ArrowLeft, Edit, Calendar, Phone, Mail, MapPin, User, CreditCard, Heart, Building, FileText, Copy, Brain, Loader } from 'lucide-react';
 import { getPatient, Patient } from '../../lib/supabase';
+import { analyzePatientWithAI } from '../../lib/ai-service';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 
@@ -11,6 +12,9 @@ const PatientProfile: React.FC = () => {
   const navigate = useNavigate();
   const [patient, setPatient] = useState<Patient | null>(null);
   const [loading, setLoading] = useState(true);
+  const [patientSummary, setPatientSummary] = useState<string>('');
+  const [aiAnalysis, setAiAnalysis] = useState<string>('');
+  const [analyzing, setAnalyzing] = useState(false);
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -19,6 +23,10 @@ const PatientProfile: React.FC = () => {
       try {
         const data = await getPatient(id);
         setPatient(data);
+        if (data) {
+          const summary = generatePatientPrompt(data);
+          setPatientSummary(summary);
+        }
       } catch (error) {
         toast.error('Failed to load patient data');
         console.error('Error fetching patient:', error);
@@ -41,6 +49,56 @@ const PatientProfile: React.FC = () => {
     }
     
     return age;
+  };
+
+  const generatePatientPrompt = (patient: Patient): string => {
+    const age = patient.dob ? calculateAge(patient.dob) : 'N/A';
+    const birthDate = patient.dob ? format(new Date(patient.dob), 'MMM d, yyyy') : 'N/A';
+    
+    return `
+${patient.name} is a ${age}-year-old ${patient.gender || 'person'} born on ${birthDate}.
+${patient.marital_status ? `They are ${patient.marital_status.toLowerCase()}` : ''}${patient.occupation ? ` and work as a ${patient.occupation}` : ''}.
+Contact info: ${patient.contact ? `Phone - ${patient.contact}` : ''}${patient.email ? `, Email - ${patient.email}` : ''}${patient.address ? `, Address - ${patient.address}` : ''}.
+${patient.emergency_contact ? `Emergency contact: ${patient.emergency_contact}.` : ''}
+Medical IDs: ${patient.uhid ? `UHID - ${patient.uhid}` : ''}${patient.aadhaar_number ? `, Aadhaar - ${patient.aadhaar_number}` : ''}${patient.abha_id ? `, ABHA - ${patient.abha_id}` : ''}.
+Insurance Status: ${patient.insurance_status ? 'Insured' : 'Not insured'}${patient.insurance_provider ? ` (${patient.insurance_provider})` : ''}.
+    `.trim();
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(patientSummary);
+      toast.success('Patient summary copied to clipboard!');
+    } catch (error) {
+      toast.error('Failed to copy to clipboard');
+    }
+  };
+
+  const analyzeWithAI = async () => {
+    if (!patientSummary || !patient) {
+      toast.error('No patient summary available for analysis');
+      return;
+    }
+
+    setAnalyzing(true);
+    try {
+      const result = await analyzePatientWithAI({
+        patientSummary,
+        patientName: patient.name
+      });
+
+      if (result.error) {
+        toast.error(result.error);
+      } else {
+        setAiAnalysis(result.analysis);
+        toast.success('Ayurvedic analysis completed!');
+      }
+    } catch (error) {
+      toast.error('Failed to analyze with AI');
+      console.error('AI analysis error:', error);
+    } finally {
+      setAnalyzing(false);
+    }
   };
 
   if (loading) {
@@ -233,6 +291,68 @@ const PatientProfile: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* Patient Summary */}
+          <div className="card mt-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-gray-900 flex items-center">
+                <FileText className="h-5 w-5 mr-2" />
+                Patient Summary
+              </h2>
+              <div className="flex space-x-2">
+                <button
+                  onClick={analyzeWithAI}
+                  disabled={analyzing}
+                  className="btn btn-secondary flex items-center text-sm"
+                >
+                  {analyzing ? (
+                    <Loader className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <Brain className="h-4 w-4 mr-2" />
+                  )}
+                  {analyzing ? 'Analyzing...' : 'AI Analysis'}
+                </button>
+                <button
+                  onClick={copyToClipboard}
+                  className="btn btn-outline flex items-center text-sm"
+                >
+                  <Copy className="h-4 w-4 mr-2" />
+                  Copy
+                </button>
+              </div>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <pre className="whitespace-pre-wrap text-gray-700 font-medium leading-relaxed">
+                {patientSummary}
+              </pre>
+            </div>
+          </div>
+
+          {/* AI Analysis Results */}
+          {aiAnalysis && (
+            <div className="card mt-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-semibold text-gray-900 flex items-center">
+                  <Brain className="h-5 w-5 mr-2" />
+                  Ayurvedic AI Analysis
+                </h2>
+                <button
+                  onClick={() => navigator.clipboard.writeText(aiAnalysis)}
+                  className="btn btn-outline flex items-center text-sm"
+                >
+                  <Copy className="h-4 w-4 mr-2" />
+                  Copy Analysis
+                </button>
+              </div>
+              <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg p-6">
+                <div className="prose prose-sm max-w-none">
+                  <div className="whitespace-pre-wrap text-gray-800 leading-relaxed">
+                    {aiAnalysis}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
