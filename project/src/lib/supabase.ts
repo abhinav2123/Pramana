@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { Patient, PatientFormData } from '../types/database';
 
 // Ensure environment variables are properly formatted as URLs
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -9,26 +10,6 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-export type Patient = {
-  id: string;
-  created_at: string;
-  name: string;
-  dob?: string;
-  gender?: string;
-  contact?: string;
-  email?: string;
-  address?: string;
-  uhid?: string;
-  aadhaar_number?: string;
-  abha_id?: string;
-  marital_status?: string;
-  occupation?: string;
-  insurance_status?: boolean;
-  insurance_provider?: string;
-  preferred_physician?: string;
-  emergency_contact?: string;
-};
 
 // API functions for patients
 export const getPatients = async (): Promise<Patient[]> => {
@@ -52,17 +33,31 @@ export const getPatient = async (id: string): Promise<Patient | null> => {
   return data;
 };
 
-export const createPatient = async (patient: Omit<Patient, 'id' | 'created_at'>): Promise<Patient> => {
-  // Clean up the data before sending to Supabase
-  const cleanedPatient = {
-    ...patient,
-    // Convert empty strings to null for date fields
-    dob: patient.dob === '' ? null : patient.dob,
+export const createPatient = async (patientData: Partial<PatientFormData>): Promise<Patient> => {
+  // Transform the data to match the database schema
+  const patientRecord = {
+    name: patientData.name,
+    dob: patientData.dob === '' ? null : patientData.dob,
+    gender: patientData.gender,
+    contact: patientData.contact || patientData.mobile,
+    mobile: patientData.mobile,
+    email: patientData.email,
+    address: patientData.address,
+    uhid: patientData.uhid,
+    aadhaar_number: patientData.aadhaar_number,
+    abha_id: patientData.abha_id,
+    marital_status: patientData.marital_status,
+    occupation: patientData.occupation,
+    occupation_type: patientData.occupation_type,
+    insurance_status: patientData.insurance_status || false,
+    insurance_provider: patientData.insurance_provider,
+    emergency_contact: patientData.emergency_contact,
+    family_history: patientData.family_history
   };
 
   const { data, error } = await supabase
     .from('patients')
-    .insert([cleanedPatient])
+    .insert([patientRecord])
     .select()
     .single();
   
@@ -70,17 +65,32 @@ export const createPatient = async (patient: Omit<Patient, 'id' | 'created_at'>)
   return data;
 };
 
-export const updatePatient = async (id: string, updates: Partial<Patient>): Promise<Patient> => {
-  // Clean up the data before sending to Supabase
-  const cleanedUpdates = {
-    ...updates,
-    // Convert empty strings to null for date fields
+export const updatePatient = async (id: string, updates: Partial<PatientFormData>): Promise<Patient> => {
+  // Transform the data to match the database schema
+  const updateRecord = {
+    name: updates.name,
     dob: updates.dob === '' ? null : updates.dob,
+    gender: updates.gender,
+    contact: updates.contact || updates.mobile,
+    mobile: updates.mobile,
+    email: updates.email,
+    address: updates.address,
+    uhid: updates.uhid,
+    aadhaar_number: updates.aadhaar_number,
+    abha_id: updates.abha_id,
+    marital_status: updates.marital_status,
+    occupation: updates.occupation,
+    occupation_type: updates.occupation_type,
+    insurance_status: updates.insurance_status,
+    insurance_provider: updates.insurance_provider,
+    emergency_contact: updates.emergency_contact,
+    family_history: updates.family_history,
+    updated_at: new Date().toISOString()
   };
 
   const { data, error } = await supabase
     .from('patients')
-    .update(cleanedUpdates)
+    .update(updateRecord)
     .eq('id', id)
     .select()
     .single();
