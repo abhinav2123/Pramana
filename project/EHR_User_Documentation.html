@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurvedic EHR System - User Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c5aa0;
+            text-align: center;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2c5aa0;
+            border-left: 4px solid #2c5aa0;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #4a90e2;
+            margin-top: 25px;
+        }
+        .feature-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .step {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .tip {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .screenshot {
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+        ul, ol {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ayurvedic Electronic Health Record (EHR) System</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #666;">
+            <strong>Complete User Guide for Healthcare Professionals</strong><br>
+            Version 1.0 | Modern Ayurvedic Practice Management
+        </p>
+
+        <div class="feature-box">
+            <h3 style="margin-top: 0; color: #2c5aa0;">🎯 What This System Does</h3>
+            <p>This Ayurvedic EHR system helps healthcare professionals manage patient records, conduct comprehensive Ayurvedic assessments, create treatment plans, and track patient progress using both traditional Ayurvedic principles and modern medical standards.</p>
+        </div>
+
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#dashboard">Dashboard Overview</a></li>
+            <li><a href="#patient-management">Patient Management</a></li>
+            <li><a href="#assessments">Ayurvedic Assessments</a></li>
+            <li><a href="#treatments">Treatment Management</a></li>
+            <li><a href="#ai-features">AI-Powered Features</a></li>
+            <li><a href="#best-practices">Best Practices</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+
+        <div class="page-break"></div>
+
+        <h2 id="getting-started">1. Getting Started</h2>
+        
+        <h3>System Requirements</h3>
+        <ul>
+            <li>Modern web browser (Chrome, Firefox, Safari, Edge)</li>
+            <li>Internet connection for data synchronization</li>
+            <li>Recommended screen resolution: 1920x1080 or higher</li>
+        </ul>
+
+        <h3>First Time Setup</h3>
+        <div class="step">
+            <strong>Step 1:</strong> Access the system through your provided web link
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> You'll see the main dashboard with patient overview
+        </div>
+        <div class="step">
+            <strong>Step 3:</strong> Click "New Patient" to add your first patient record
+        </div>
+
+        <div class="tip">
+            <strong>💡 Tip:</strong> Take a few minutes to explore the dashboard and familiarize yourself with the layout before adding patients.
+        </div>
+
+        <h2 id="dashboard">2. Dashboard Overview</h2>
+        
+        <p>The dashboard is your command center, providing quick access to all patient information and system features.</p>
+
+        <h3>Key Dashboard Elements</h3>
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Total Patients</strong></td>
+                <td>Shows the total number of patients in your database</td>
+            </tr>
+            <tr>
+                <td><strong>New This Month</strong></td>
+                <td>Displays patients added in the current month</td>
+            </tr>
+            <tr>
+                <td><strong>Active Records</strong></td>
+                <td>Shows patients with recent activity</td>
+            </tr>
+            <tr>
+                <td><strong>Search Bar</strong></td>
+                <td>Quickly find patients by name</td>
+            </tr>
+            <tr>
+                <td><strong>New Patient Button</strong></td>
+                <td>Add a new patient to the system</td>
+            </tr>
+        </table>
+
+        <h3>Patient Cards</h3>
+        <p>Each patient is displayed as a card showing:</p>
+        <ul>
+            <li>Patient name and age</li>
+            <li>Contact information</li>
+            <li>Last visit date</li>
+            <li>Quick access to patient profile</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <h2 id="patient-management">3. Patient Management</h2>
+
+        <h3>Adding a New Patient</h3>
+        <div class="step">
+            <strong>Step 1:</strong> Click the "New Patient" button on the dashboard
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> Fill in the patient registration form with the following information:
+        </div>
+
+        <h4>Required Information</h4>
+        <ul>
+            <li><strong>Full Name:</strong> Patient's complete name</li>
+            <li><strong>Date of Birth:</strong> For age calculation and dosha analysis</li>
+            <li><strong>Gender:</strong> Important for Ayurvedic assessment</li>
+            <li><strong>Mobile Number:</strong> Primary contact method</li>
+        </ul>
+
+        <h4>Optional but Recommended Information</h4>
+        <ul>
+            <li><strong>Email Address:</strong> For appointment reminders and reports</li>
+            <li><strong>Address:</strong> Complete address for records</li>
+            <li><strong>UHID:</strong> Unique Health ID (if available)</li>
+            <li><strong>Aadhaar Number:</strong> Government ID for verification</li>
+            <li><strong>ABHA ID:</strong> Ayushman Bharat Health Account</li>
+            <li><strong>Marital Status:</strong> Relevant for treatment planning</li>
+            <li><strong>Occupation:</strong> Helps understand lifestyle factors</li>
+            <li><strong>Insurance Information:</strong> For billing purposes</li>
+            <li><strong>Emergency Contact:</strong> Critical for patient safety</li>
+            <li><strong>Family History:</strong> Important for genetic predisposition</li>
+        </ul>
+
+        <div class="step">
+            <strong>Step 3:</strong> Click "Save Patient" to create the record
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Always verify patient information before saving. Incorrect data can affect treatment decisions and patient safety.
+        </div>
+
+        <h3>Patient Profile View</h3>
+        <p>Once a patient is created, you can access their comprehensive profile which includes:</p>
+        
+        <ul>
+            <li><strong>Demographic Information:</strong> All personal and contact details</li>
+            <li><strong>Medical History:</strong> Family history and previous conditions</li>
+            <li><strong>Assessment History:</strong> All Ayurvedic assessments conducted</li>
+            <li><strong>Treatment Plans:</strong> Current and past treatments</li>
+            <li><strong>Timeline:</strong> Chronological record of all interactions</li>
+            <li><strong>AI Analysis:</strong> Computer-generated insights about the patient</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <h2 id="assessments">4. Ayurvedic Assessments</h2>
+
+        <p>Ayurvedic assessments are the foundation of treatment planning. The system supports comprehensive evaluation using traditional Ayurvedic methods combined with modern medical standards.</p>
+
+        <h3>Creating a New Assessment</h3>
+        <div class="step">
+            <strong>Step 1:</strong> Open the patient's profile
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> Click "New Assessment" button
+        </div>
+        <div class="step">
+            <strong>Step 3:</strong> Fill in the assessment form with detailed findings
+        </div>
+
+        <h3>Assessment Components</h3>
+
+        <h4>Dosha Analysis</h4>
+        <ul>
+            <li><strong>Prakriti (Constitution):</strong> Patient's natural body-mind constitution</li>
+            <li><strong>Vikriti (Current State):</strong> Current dosha imbalances</li>
+            <li><strong>Scoring System:</strong> Vata, Pitta, and Kapha scores (must total 100%)</li>
+        </ul>
+
+        <h4>Traditional Examinations</h4>
+        <ul>
+            <li><strong>Nadi Pariksha:</strong> Pulse diagnosis findings</li>
+            <li><strong>Jihva Pariksha:</strong> Tongue examination</li>
+            <li><strong>Akriti Pariksha:</strong> Physical appearance assessment</li>
+            <li><strong>Srotas Analysis:</strong> Channel system evaluation</li>
+        </ul>
+
+        <h4>Modern Medical Integration</h4>
+        <ul>
+            <li><strong>ICD-11 Codes:</strong> International disease classification</li>
+            <li><strong>Lab Results:</strong> Modern diagnostic test results</li>
+            <li><strong>Clinical Notes:</strong> Detailed examination findings</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 Tip:</strong> Take your time with dosha scoring. The system validates that Vata + Pitta + Kapha = 100%. This accuracy is crucial for proper treatment planning.
+        </div>
+
+        <h3>Assessment Best Practices</h3>
+        <ul>
+            <li>Conduct assessments in a quiet, comfortable environment</li>
+            <li>Allow sufficient time for thorough examination</li>
+            <li>Document all findings, even if they seem minor</li>
+            <li>Use the notes section for detailed observations</li>
+            <li>Review previous assessments before creating new ones</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <h2 id="treatments">5. Treatment Management</h2>
+
+        <p>The treatment management system allows you to create comprehensive Ayurvedic treatment plans that integrate traditional therapies with modern medical approaches.</p>
+
+        <h3>Creating Treatment Plans</h3>
+        <div class="step">
+            <strong>Step 1:</strong> From the patient profile, click "New Treatment"
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> Select the assessment this treatment is based on
+        </div>
+        <div class="step">
+            <strong>Step 3:</strong> Fill in the treatment details
+        </div>
+
+        <h3>Treatment Components</h3>
+
+        <h4>Diagnosis</h4>
+        <ul>
+            <li><strong>Primary Ayurvedic Diagnosis:</strong> Main condition in Ayurvedic terms</li>
+            <li><strong>Secondary Diagnoses:</strong> Additional conditions if any</li>
+            <li><strong>ICD-11 Diagnoses:</strong> Modern medical classifications</li>
+        </ul>
+
+        <h4>Therapy Planning</h4>
+        <ul>
+            <li><strong>Shamana Therapy:</strong> Palliative treatments</li>
+            <li><strong>Shodhana Therapy:</strong> Purification treatments</li>
+            <li><strong>Rasayana Plan:</strong> Rejuvenation protocols</li>
+        </ul>
+
+        <h4>Prescriptions</h4>
+        <ul>
+            <li><strong>Herbal Formulations:</strong> Specific herbs and combinations</li>
+            <li><strong>Dosage Instructions:</strong> Timing and quantity</li>
+            <li><strong>Duration:</strong> How long to take the treatment</li>
+        </ul>
+
+        <h4>Lifestyle Recommendations</h4>
+        <ul>
+            <li><strong>Diet Plan:</strong> Food recommendations and restrictions</li>
+            <li><strong>Lifestyle Changes:</strong> Daily routine modifications</li>
+            <li><strong>Exercise Recommendations:</strong> Physical activity guidelines</li>
+        </ul>
+
+        <h3>Treatment Tracking</h3>
+        <p>The system automatically tracks:</p>
+        <ul>
+            <li>Treatment start and end dates</li>
+            <li>Follow-up schedules</li>
+            <li>Patient compliance</li>
+            <li>Outcome measurements</li>
+        </ul>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Always review the patient's current medications and allergies before prescribing new treatments to avoid interactions.
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2 id="ai-features">6. AI-Powered Features</h2>
+
+        <p>The system includes advanced AI features to enhance clinical decision-making and provide deeper insights into patient care.</p>
+
+        <h3>AI Patient Analysis</h3>
+        <p>The AI analyzes all patient data to provide:</p>
+        <ul>
+            <li><strong>Comprehensive Patient Summary:</strong> AI-generated overview of patient condition</li>
+            <li><strong>Dosha Imbalance Analysis:</strong> Detailed analysis of current imbalances</li>
+            <li><strong>Treatment Recommendations:</strong> AI-suggested treatment approaches</li>
+            <li><strong>Risk Assessment:</strong> Potential health risks and preventive measures</li>
+        </ul>
+
+        <h3>Using AI Features</h3>
+        <div class="step">
+            <strong>Step 1:</strong> Open the patient profile
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> Click "Analyze with AI" button
+        </div>
+        <div class="step">
+            <strong>Step 3:</strong> Wait for the analysis to complete (usually takes 30-60 seconds)
+        </div>
+        <div class="step">
+            <strong>Step 4:</strong> Review the AI-generated insights and recommendations
+        </div>
+
+        <div class="tip">
+            <strong>💡 Tip:</strong> AI analysis works best when you have comprehensive patient data including assessments, treatments, and timeline entries. The more data available, the more accurate the analysis.
+        </div>
+
+        <h3>AI Limitations</h3>
+        <div class="warning">
+            <strong>⚠️ Important:</strong> AI recommendations are tools to assist clinical decision-making. They should not replace professional medical judgment. Always review and validate AI suggestions before implementing them in patient care.
+        </div>
+
+        <h2 id="best-practices">7. Best Practices</h2>
+
+        <h3>Data Entry Best Practices</h3>
+        <ul>
+            <li><strong>Be Consistent:</strong> Use standardized terminology and formats</li>
+            <li><strong>Be Thorough:</strong> Fill in all relevant fields, even if optional</li>
+            <li><strong>Be Accurate:</strong> Double-check all information before saving</li>
+            <li><strong>Be Timely:</strong> Enter data as soon as possible after patient interactions</li>
+        </ul>
+
+        <h3>Patient Privacy and Security</h3>
+        <ul>
+            <li>Never share patient login credentials</li>
+            <li>Log out when leaving the system unattended</li>
+            <li>Use strong passwords and change them regularly</li>
+            <li>Report any security concerns immediately</li>
+        </ul>
+
+        <h3>Clinical Documentation</h3>
+        <ul>
+            <li>Document all patient interactions</li>
+            <li>Use clear, professional language</li>
+            <li>Include both positive and negative findings</li>
+            <li>Update patient information regularly</li>
+        </ul>
+
+        <div class="page-break"></div>
+
+        <h2 id="troubleshooting">8. Troubleshooting</h2>
+
+        <h3>Common Issues and Solutions</h3>
+
+        <h4>System Access Issues</h4>
+        <table>
+            <tr>
+                <th>Problem</th>
+                <th>Solution</th>
+            </tr>
+            <tr>
+                <td>Cannot access the system</td>
+                <td>Check internet connection and try refreshing the page</td>
+            </tr>
+            <tr>
+                <td>Slow loading times</td>
+                <td>Clear browser cache and cookies, try a different browser</td>
+            </tr>
+            <tr>
+                <td>Data not saving</td>
+                <td>Check all required fields are filled, ensure stable internet connection</td>
+            </tr>
+        </table>
+
+        <h4>Data Entry Issues</h4>
+        <table>
+            <tr>
+                <th>Problem</th>
+                <th>Solution</th>
+            </tr>
+            <tr>
+                <td>Dosha scores don't add up to 100%</td>
+                <td>Adjust scores so Vata + Pitta + Kapha = 100% exactly</td>
+            </tr>
+            <tr>
+                <td>Cannot find a patient</td>
+                <td>Check spelling in search, try partial name search</td>
+            </tr>
+            <tr>
+                <td>AI analysis not working</td>
+                <td>Ensure patient has sufficient data (assessments, treatments)</td>
+            </tr>
+        </table>
+
+        <h3>Getting Help</h3>
+        <p>If you encounter issues not covered in this guide:</p>
+        <ul>
+            <li>Check the system's help section</li>
+            <li>Contact your system administrator</li>
+            <li>Document the issue with screenshots if possible</li>
+            <li>Note the exact steps that led to the problem</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 Tip:</strong> Regular system updates may introduce new features or changes. Check for update notifications and review any new documentation provided.
+        </div>
+
+        <div class="footer">
+            <p><strong>Ayurvedic EHR System - User Documentation</strong></p>
+            <p>This documentation is designed to help healthcare professionals effectively use the Ayurvedic EHR system for optimal patient care.</p>
+            <p>For technical support or questions, please contact your system administrator.</p>
+            <p>© 2024 Ayurvedic EHR System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html> 
